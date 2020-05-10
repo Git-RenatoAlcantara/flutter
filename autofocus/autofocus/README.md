@@ -1,4 +1,5 @@
 # autofocus
 
-![alt text][tela-principal]
-[tela-principal]: https://media.giphy.com/media/RGXMNg07fxplXXIokF/giphy.gif "Tela confirmação de sms"
+![alt text][tela-inicial]
+
+[tela-inicial]: https://i.imgur.com/qDs8jSp.png "Logo Title Text 2"

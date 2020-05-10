@@ -1,6 +1,6 @@
 # AutoFocus
 
-> Inputs com autofocu para confirmação de sms
+> Inputs com autofocu para tele de confirmação de sms
 
 ![alt text][tela-inicial]
 

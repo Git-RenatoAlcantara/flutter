@@ -21,9 +21,9 @@ dependencies:
   flutter:
     sdk: flutter
 
-renato_button:
+ui_sms_code:
   git:
-    url: https://github.com/Git-RenatoAlcantara/renato_button
+    url: https://github.com/Git-RenatoAlcantara/flutter/tree/master/ui_sms_code
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

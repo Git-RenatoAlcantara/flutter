@@ -2,4 +2,4 @@
 
 ![alt text][tela-inicial]
 
-[tela-inicial]: https://i.imgur.com/qDs8jSp.png "Logo Title Text 2"
+[tela-inicial]: https://media.giphy.com/media/RGXMNg07fxplXXIokF/giphy.gif "Logo Title Text 2"

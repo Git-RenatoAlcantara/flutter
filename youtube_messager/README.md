@@ -2,7 +2,7 @@
 
 
 > Projeto feito apartir de uma necessidade que encontrei em um grupo. 
-<br> Somente a parte visual sem funcionalidade real.
+Somente a parte visual sem funcionalidade real.
 
 ![alt text][tela-inicial]
 

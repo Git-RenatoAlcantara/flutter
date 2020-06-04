@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:youtube_messager/Model/user_model.dart';
 
 class SinupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final userModel = Modular.get<UserModel>();
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
@@ -26,7 +30,7 @@ class SinupScreen extends StatelessWidget {
                 child: Stack(
                   children: <Widget>[
                     Positioned(
-                      top: (size.height - size.height) + 150,
+                      top: (size.height - size.height) + 190,
                       child: Container(
                         width: size.width,
                         height: size.height,
@@ -49,7 +53,7 @@ class SinupScreen extends StatelessWidget {
                               children: <Widget>[
                                 Column(
                                   children: <Widget>[
-                                    input_name(),
+                                    input_name(userModel: userModel),
                                     input_email(),
                                     input_password(),
                                     input_repassword(),
@@ -83,7 +87,8 @@ class SinupScreen extends StatelessWidget {
                                           ),
                                           decoration: BoxDecoration(
                                             color: Colors.greenAccent,
-                                            borderRadius: BorderRadius.circular(50),
+                                            borderRadius:
+                                                BorderRadius.circular(50),
                                           ),
                                         ))
                                   ],
@@ -104,22 +109,24 @@ class SinupScreen extends StatelessWidget {
     );
   }
 
-  Widget input_name() {
+  Widget input_name({UserModel userModel}) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       child: Material(
         color: Color(0xfff2f5f6),
-        child: TextField(
-          obscureText: false,
-          onChanged: (value) {},
-          decoration: InputDecoration(
-              hintText: "Digite seu nome",
-              contentPadding: EdgeInsets.only(left: 10),
-              disabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              border: InputBorder.none),
-        ),
+        child: Observer(builder: (_) {
+          return TextField(
+            obscureText: false,
+            onChanged: userModel.setName,
+            decoration: InputDecoration(
+                hintText: "Digite seu nome",
+                contentPadding: EdgeInsets.only(left: 10),
+                disabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                border: InputBorder.none),
+          );
+        }),
       ),
     );
   }

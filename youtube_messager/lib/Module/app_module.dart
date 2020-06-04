@@ -1,4 +1,5 @@
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:youtube_messager/Model/user_model.dart';
 import 'package:youtube_messager/View/signup_view.dart';
 import 'package:youtube_messager/View/splash_view.dart';
 import 'package:youtube_messager/route.dart';
@@ -9,7 +10,7 @@ class AppModule extends MainModule{
   @override
   // TODO: implement binds
   List<Bind> get binds => [
-
+    Bind((_) => UserModel()),
   ];
 
 

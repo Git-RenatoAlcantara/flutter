@@ -1,16 +1,19 @@
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
+import 'package:youtube_messager/Controller/firebase_controller.dart';
+import 'package:youtube_messager/Controller/user_controller.dart';
 import 'package:youtube_messager/Model/user_model.dart';
 import 'package:youtube_messager/View/signup_view.dart';
-import 'package:youtube_messager/View/splash_view.dart';
+import 'package:youtube_messager/repository/firebase_reposity.dart';
 import 'package:youtube_messager/route.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:youtube_messager/route.dart';
 
 class AppModule extends MainModule{
-  @override
-  // TODO: implement binds
+
   List<Bind> get binds => [
     Bind((_) => UserModel()),
+    Bind((_) => UserController()),
+    Bind((_) => FirebaseRepository()),
+    Bind((_) => FirebaseController())
   ];
 
 

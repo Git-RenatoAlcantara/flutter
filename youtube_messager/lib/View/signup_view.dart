@@ -1,12 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:youtube_messager/Model/user_model.dart';
+import 'package:youtube_messager/Controller/firebase_controller.dart';
+import 'package:youtube_messager/Controller/user_controller.dart';
 
-class SinupScreen extends StatelessWidget {
+class SinupScreen extends StatefulWidget {
+  @override
+  _SinupScreenState createState() => _SinupScreenState();
+}
+
+class _SinupScreenState extends State<SinupScreen> {
+  UserController _userController;
+  FirebaseController _fireBaseController;
+  bool loading = false;
+
+  @override
+  void initState() {
+    _userController = Modular.get<UserController>();
+    _fireBaseController = Modular.get<FirebaseController>();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final userModel = Modular.get<UserModel>();
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
@@ -53,10 +69,13 @@ class SinupScreen extends StatelessWidget {
                               children: <Widget>[
                                 Column(
                                   children: <Widget>[
-                                    input_name(userModel: userModel),
-                                    input_email(),
-                                    input_password(),
-                                    input_repassword(),
+                                    input_name(userController: _userController),
+                                    input_email(
+                                        userController: _userController),
+                                    input_password(
+                                        userController: _userController),
+                                    input_repassword(
+                                        userController: _userController),
                                     Container(
                                       width: double.infinity,
                                       child: Row(
@@ -75,22 +94,36 @@ class SinupScreen extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    FlatButton(
-                                        onPressed: () {},
-                                        child: Container(
-                                          width: double.infinity,
-                                          height: 50,
-                                          child: Center(
-                                            child: Text("CADASTRAR",
-                                                style: TextStyle(
-                                                    color: Colors.white)),
-                                          ),
-                                          decoration: BoxDecoration(
-                                            color: Colors.greenAccent,
-                                            borderRadius:
-                                                BorderRadius.circular(50),
-                                          ),
-                                        ))
+                                    Observer(builder: (context) {
+                                      return FlatButton(
+                                          onPressed: () {
+                                            if (_userController.isValid.length >
+                                                0) {
+                                              final snackBar = SnackBar(
+                                                  backgroundColor: Colors.red,
+                                                  content: Text(_userController
+                                                      .isValid.first));
+                                              Scaffold.of(context)
+                                                  .showSnackBar(snackBar);
+                                                
+                                            }
+                                            _fireBaseController.createUserWithEmailAndPassword();
+                                          },
+                                          child: Container(
+                                            width: double.infinity,
+                                            height: 50,
+                                            child: Center(
+                                              child: Text("CADASTRAR",
+                                                  style: TextStyle(
+                                                      color: Colors.white)),
+                                            ),
+                                            decoration: BoxDecoration(
+                                              color: Colors.greenAccent,
+                                              borderRadius:
+                                                  BorderRadius.circular(50),
+                                            ),
+                                          ));
+                                    })
                                   ],
                                 )
                               ],
@@ -109,7 +142,7 @@ class SinupScreen extends StatelessWidget {
     );
   }
 
-  Widget input_name({UserModel userModel}) {
+  Widget input_name({UserController userController}) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       child: Material(
@@ -117,7 +150,7 @@ class SinupScreen extends StatelessWidget {
         child: Observer(builder: (_) {
           return TextField(
             obscureText: false,
-            onChanged: userModel.setName,
+            onChanged: userController.userModel.setName,
             decoration: InputDecoration(
                 hintText: "Digite seu nome",
                 contentPadding: EdgeInsets.only(left: 10),
@@ -131,62 +164,68 @@ class SinupScreen extends StatelessWidget {
     );
   }
 
-  Widget input_email() {
+  Widget input_email({UserController userController}) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
       child: Material(
         color: Color(0xfff2f5f6),
-        child: TextField(
-          obscureText: false,
-          onChanged: (value) {},
-          decoration: InputDecoration(
-              hintText: "Entre com o E-mail",
-              contentPadding: EdgeInsets.only(left: 10),
-              disabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              border: InputBorder.none),
-        ),
+        child: Observer(builder: (_) {
+          return TextField(
+            obscureText: false,
+            onChanged: userController.userModel.setEmail,
+            decoration: InputDecoration(
+                hintText: "Entre com o E-mail",
+                contentPadding: EdgeInsets.only(left: 10),
+                disabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                border: InputBorder.none),
+          );
+        }),
       ),
     );
   }
 
-  Widget input_password() {
+  Widget input_password({UserController userController}) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
       child: Material(
         color: Color(0xfff2f5f6),
-        child: TextField(
-          obscureText: false,
-          onChanged: (value) {},
-          decoration: InputDecoration(
-              hintText: "Entre com a senha",
-              contentPadding: EdgeInsets.only(left: 10),
-              disabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              border: InputBorder.none),
-        ),
+        child: Observer(builder: (_) {
+          return TextField(
+            obscureText: false,
+            onChanged: userController.userModel.setPassword,
+            decoration: InputDecoration(
+                hintText: "Entre com a senha",
+                contentPadding: EdgeInsets.only(left: 10),
+                disabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                border: InputBorder.none),
+          );
+        }),
       ),
     );
   }
 
-  Widget input_repassword() {
+  Widget input_repassword({UserController userController}) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
       child: Material(
         color: Color(0xfff2f5f6),
-        child: TextField(
-          obscureText: false,
-          onChanged: (value) {},
-          decoration: InputDecoration(
-              hintText: "Confirme a senha",
-              contentPadding: EdgeInsets.only(left: 10),
-              disabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              border: InputBorder.none),
-        ),
+        child: Observer(builder: (_) {
+          return TextField(
+            obscureText: false,
+            onChanged: userController.userModel.setConfirmPassword,
+            decoration: InputDecoration(
+                hintText: "Confirme a senha",
+                contentPadding: EdgeInsets.only(left: 10),
+                disabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                border: InputBorder.none),
+          );
+        }),
       ),
     );
   }

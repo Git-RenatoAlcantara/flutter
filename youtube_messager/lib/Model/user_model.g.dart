@@ -9,12 +9,33 @@ part of 'user_model.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$UserModel on _UserModelBase, Store {
-  Computed<String> _$nameComputed;
+  Computed<String> _$getNameComputed;
 
   @override
-  String get name => (_$nameComputed ??=
-          Computed<String>(() => super.name, name: '_UserModelBase.name'))
+  String get getName => (_$getNameComputed ??=
+          Computed<String>(() => super.getName, name: '_UserModelBase.getName'))
       .value;
+  Computed<String> _$getPasswordComputed;
+
+  @override
+  String get getPassword =>
+      (_$getPasswordComputed ??= Computed<String>(() => super.getPassword,
+              name: '_UserModelBase.getPassword'))
+          .value;
+  Computed<String> _$getEmailComputed;
+
+  @override
+  String get getEmail =>
+      (_$getEmailComputed ??= Computed<String>(() => super.getEmail,
+              name: '_UserModelBase.getEmail'))
+          .value;
+  Computed<String> _$getRepesswordComputed;
+
+  @override
+  String get getRepessword =>
+      (_$getRepesswordComputed ??= Computed<String>(() => super.getRepessword,
+              name: '_UserModelBase.getRepessword'))
+          .value;
 
   final _$_nameAtom = Atom(name: '_UserModelBase._name');
 
@@ -126,7 +147,10 @@ mixin _$UserModel on _UserModelBase, Store {
   @override
   String toString() {
     return '''
-name: ${name}
+getName: ${getName},
+getPassword: ${getPassword},
+getEmail: ${getEmail},
+getRepessword: ${getRepessword}
     ''';
   }
 }

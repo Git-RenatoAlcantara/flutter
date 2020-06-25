@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "913139657554",
+    "firebase_url": "https://mensagemyt-6ffe8.firebaseio.com",
+    "project_id": "mensagemyt-6ffe8",
+    "storage_bucket": "mensagemyt-6ffe8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:913139657554:android:77786c8803b78599f8288b",
+        "android_client_info": {
+          "package_name": "com.example.youtube_messager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "913139657554-i8fl66vbcrldla9d1r90g3t6tguggl28.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKOePfzS8V6XpluWIUcXw9SEeUIJVigO4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "913139657554-i8fl66vbcrldla9d1r90g3t6tguggl28.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

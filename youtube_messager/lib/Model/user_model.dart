@@ -4,12 +4,7 @@ part 'user_model.g.dart';
 class UserModel = _UserModelBase with _$UserModel;
 
 abstract class _UserModelBase with Store {
-  
-  _UserModelBase(){
-    autorun((_){
-      print(_name);
-    });
-  }
+
 
   @observable
   String _name = "";
@@ -38,7 +33,14 @@ abstract class _UserModelBase with Store {
   setConfirmPassword(String value) => _confirmPassword = value;
 
   @computed
-  String get name => _name;
+  String get getName => _name;
+  
+  @computed
+  String get getPassword => _password;
 
-
+  @computed 
+  String get getEmail => _email;
+  
+  @computed
+  String get getRepessword => _confirmPassword;
 }
